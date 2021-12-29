@@ -25,18 +25,6 @@ class TransactionsController < ApplicationController
     end
   end
 
-  def deposit(account, credit)
-    @customer = Customer.find_by!(account: account)
-    id = @customer.id 
-    @transaction = Transaction.find(id)
-    @transaction.opening_balance = @transaction.final_balance
-    @transaction.credit = credit 
-    @transaction.final_balance = @transaction.opening_balance + @transaction.credit
-    @transaction.customer = @customer  
-    @transaction.save
-    render json: @customer, only: [:name, :account], include: {transactions: { only: [:opening_balance, :credit, :final_balance]}} 
-  end
-
   # PATCH/PUT /transactions/1
   def update
     if @transaction.update(transaction_params)
