@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :extracts
   resources :withdraws
   resources :deposits
   resources :transactions

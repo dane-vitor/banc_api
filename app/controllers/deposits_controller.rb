@@ -24,6 +24,9 @@ class DepositsController < ApplicationController
     @transaction.customer = @customer  
     @transaction.final_balance = @transaction.opening_balance + @transaction.credit
     @transaction.save
+    @extract = Extract.new(current_account: @transaction.customer.account, opening_balance: @transaction.opening_balance,
+    credit: @transaction.credit, final_balance: @transaction.final_balance)
+    @extract.save
     @deposit.destroy
     render json: @customer, only: [:name, :account], include: {transactions: { only: [:opening_balance, :credit, :final_balance]}} 
   end

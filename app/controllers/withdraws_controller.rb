@@ -13,20 +13,26 @@ class WithdrawsController < ApplicationController
     render json: @withdraw
   end
 
+
+  
+
   # POST /withdraws
   def create
     set_withdraw
     @customer = Customer.find_by!(account: @withdraw.current_account)
     id = @customer.id 
     @transaction = Transaction.find(id)
-    if @transaction.opening_balance < @withdraw.withdraw
-        redirect_to withdraws_path, :flash => {:error => "Insufficient funds."}
-else
+    if @withdraw.withdraw > @transaction.final_balance
+      render json: {"error": "insufficient_funds"}    
+    else
     @transaction.opening_balance = @transaction.final_balance
     @transaction.debit = @withdraw.withdraw
     @transaction.customer = @customer
     @transaction.final_balance = @transaction.opening_balance - @transaction.debit  
     @transaction.save
+    @extract = Extract.new(current_account: @transaction.customer.account, opening_balance: @transaction.opening_balance,
+      debit: @transaction.debit, final_balance: @transaction.final_balance)
+      @extract.save
     @withdraw.destroy
     render json: @customer, only: [:name, :account], include: {transactions: { only: [:opening_balance, :debit, :final_balance]}} 
   end
