@@ -1,5 +1,3 @@
-require 'securerandom'
-
 class CustomersController < ApplicationController
   before_action :set_customer, only: [:show, :update, :destroy]
 
@@ -46,13 +44,30 @@ class CustomersController < ApplicationController
   end
   
   def account_generator
-  account = (SecureRandom.random_number * (10**7)).round
-  account
+    n1 = rand(9)
+    n2 = rand(9)
+    n3 = rand(9)
+    n4 = rand(9)
+    n5 = rand(9)
+    n6 = rand(9)
+    n7 = rand(9)
+    if n1 == 0
+      n1 += 1
+    end
+    account = "#{n1}#{n2}#{n3}#{n4}#{n5}#{n6}#{n7}"
+    account
   end
   
   def password_generator
-  password = (SecureRandom.random_number * (10**4)).round
-  password 
+    n1 = rand(9)
+    n2 = rand(9)
+    n3 = rand(9)
+    n4 = rand(9)
+    if n1 == 0
+      n1 += 1
+    end
+    account = "#{n1}#{n2}#{n3}#{n4}"
+    account
   end
 
   private

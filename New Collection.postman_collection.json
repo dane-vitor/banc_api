@@ -1,0 +1,172 @@
+{
+	"info": {
+		"_postman_id": "4afd0ec7-3699-4643-ae5c-3d756d9cb18b",
+		"name": "New Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Post Cliente",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "customer[birthdate]",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "customer[image]",
+							"type": "file",
+							"src": "/C:/Users/Dane/Pictures/2021-12-12/001.jpg"
+						},
+						{
+							"key": "customer[name]",
+							"value": "",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:3000/customers/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"customers",
+						""
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Deposit",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "string"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "deposit[current_account]",
+							"value": "9691830",
+							"type": "string"
+						},
+						{
+							"key": "deposit[deposit]",
+							"value": "10.0",
+							"type": "string"
+						},
+						{
+							"key": "",
+							"value": "",
+							"type": "string",
+							"disabled": true
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:3000/deposits",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"deposits"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Withdraw",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "withdraw[current_account]",
+							"value": "8755829",
+							"type": "default"
+						},
+						{
+							"key": "withdraw[withdraw]",
+							"value": "10",
+							"type": "default"
+						},
+						{
+							"key": "withdraw[password]",
+							"value": "1021",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:3000/withdraws",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"withdraws"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post extract",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		}
+	]
+}
