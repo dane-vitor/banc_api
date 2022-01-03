@@ -22,8 +22,11 @@ class WithdrawsController < ApplicationController
     @customer = Customer.find_by!(account: @withdraw.current_account)
     id = @customer.id 
     @transaction = Transaction.find(id)
+    if @withdraw.password != @customer.password
+      render json: {errors: 'ivalid_password!'}, status: :unauthorized
+    else
     if @withdraw.withdraw > @transaction.final_balance
-      render json: {"error": "insufficient_funds"}    
+      render json: {errors: 'insuficcient_funds!'}, status: :unauthorized
     else
     @transaction.opening_balance = @transaction.final_balance
     @transaction.debit = @withdraw.withdraw
@@ -37,6 +40,8 @@ class WithdrawsController < ApplicationController
     render json: @customer, only: [:name, :account], include: {transactions: { only: [:opening_balance, :debit, :final_balance]}} 
   end
   end
+end
+  
 
   # PATCH/PUT /withdraws/1
   def update
@@ -60,6 +65,6 @@ class WithdrawsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def withdraw_params
-      params.require(:withdraw).permit(:current_account, :withdraw)
+      params.require(:withdraw).permit(:current_account, :withdraw, :password)
     end
 end

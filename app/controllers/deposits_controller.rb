@@ -12,6 +12,7 @@ class DepositsController < ApplicationController
   def show
     render json: @deposit
   end
+  
 
   # POST /deposits
   def create

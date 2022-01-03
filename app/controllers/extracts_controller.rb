@@ -16,7 +16,7 @@ class ExtractsController < ApplicationController
   def create
     set_extract
     @extract = Extract.where(current_account: @extract.current_account)
-    render json: @extract, only: [:current_account, :opening_balance, :credit, :debit, :final_balance, root:true], root: true
+    render json: @extract, only: [:created_at, :current_account, :opening_balance, :credit, :debit, :final_balance, root:true], root: true   
   end
 
   # PATCH/PUT /extracts/1
