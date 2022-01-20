@@ -4,4 +4,6 @@ class Transaction < ApplicationRecord
   validates :credit, numericality: true
   validates :debit, numericality: true
   validates :final_balance, numericality: true
+
+  
 end

@@ -23,7 +23,7 @@ class WithdrawsController < ApplicationController
     id = @customer.id 
     @transaction = Transaction.find(id)
     if @withdraw.password != @customer.password
-      render json: {errors: 'ivalid_password!'}, status: :unauthorized
+      render json: {errors: 'invalid_password!'}, status: :unauthorized
     else
     if @withdraw.withdraw > @transaction.final_balance
       render json: {errors: 'insuficcient_funds!'}, status: :unauthorized
